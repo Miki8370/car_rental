@@ -3,6 +3,14 @@ from car.models import Car, Rental
 from django.contrib.auth.models import User
 
 
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+
+        model = User
+        fields = '__all__'
+
 class AdminCarSerializer(serializers.ModelSerializer):
     class Meta:
         

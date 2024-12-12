@@ -9,6 +9,13 @@ from rest_framework.decorators import action
 # Create your views here.
 
 
+
+class UserViewer(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny]
+    http_method_names = ['get', 'patch']
+
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.filter(is_rented=True)  # Only available cars
     serializer_class = CarSerializer
@@ -23,7 +30,7 @@ class CarViewSet(viewsets.ModelViewSet):
 class RentalViewSet(viewsets.ModelViewSet):
     queryset = Rental.objects.all()
     serializer_class = RentalSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def perform_create(self, serializer):
         car = serializer.validated_data['car']
